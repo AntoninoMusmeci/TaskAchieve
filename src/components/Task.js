@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+
+import { useTask } from "../hooks";
 import Checkbox from "./Checkbox";
 function Task() {
-  const tasks = [];
+  const tasks = useTask("task");
   let projectName = "";
+
   return (
     <div className="tast" data-testid="task">
       Task

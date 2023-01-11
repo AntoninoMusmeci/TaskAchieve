@@ -5,6 +5,7 @@ import {
   FaRegCalendarAlt,
   FaRegCalendar,
 } from "react-icons/fa";
+import Task from "../Task";
 function Sidebar() {
   return (
     <div className="sidebar" data-testid="sidebar">
@@ -35,6 +36,7 @@ function Sidebar() {
       </div>
       <ul className="sidebar__projects">Projects list</ul>
       <div> Add Project component </div>
+      <Task />
     </div>
   );
 }
