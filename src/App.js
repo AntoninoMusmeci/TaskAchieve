@@ -1,5 +1,5 @@
-import Header from "./layout/Header";
-import Content from "./layout/Content";
+import Header from "./components/layout/Header";
+import Content from "./components/layout/Content";
 export const App = () => 
   <div className="App">
     <Header />
