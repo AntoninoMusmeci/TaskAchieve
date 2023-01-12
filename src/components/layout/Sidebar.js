@@ -10,19 +10,19 @@ function Sidebar() {
   return (
     <div className="sidebar" data-testid="sidebar">
       <ul className="sidebar__generic">
-        <li>
+        <li data-testid="inbox" className="inbox">
           <span>
             <FaInbox />
           </span>
           <span> Inbox</span>
         </li>
-        <li>
+        <li data-testid="today" className="today">
           <span>
             <FaRegCalendar />
           </span>
           <span> Today</span>
         </li>
-        <li>
+        <li data-testid="week" className="week">
           <span>
             <FaRegCalendarAlt />
           </span>
@@ -33,6 +33,7 @@ function Sidebar() {
         <span>
           <FaChevronDown />
         </span>
+        <h2> Projects</h2>
       </div>
       <ul className="sidebar__projects">Projects list</ul>
       <div> Add Project component </div>

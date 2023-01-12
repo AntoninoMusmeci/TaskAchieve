@@ -5,18 +5,17 @@ function Header() {
     <header className="header" data-testid="header">
       <nav>
         <div className="logo">
-          {/* <svg width={80} height={80}> */}
-            <img src="/images/icon.svg" alt="taskachiever" width={20}></img>
-          {/* </svg> */}
-
-          <div className="settings">
-            <ul>
-              <li>+</li>
-              <li>
-                <HiOutlineLightBulb></HiOutlineLightBulb>
-              </li>
-            </ul>
-          </div>
+    
+          <img src="/images/icon.svg" alt="taskachiever" width={20}></img>
+ 
+        </div>
+        <div className="settings">
+          <ul>
+            <li className="settings__add">+</li>
+            <li className="settings__darkmode">
+              <HiOutlineLightBulb></HiOutlineLightBulb>
+            </li>
+          </ul>
         </div>
       </nav>
     </header>
