@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import Projects from "../Projects";
 import {
   FaChevronDown,
   FaInbox,
@@ -7,6 +8,7 @@ import {
 } from "react-icons/fa";
 import Task from "../Task";
 function Sidebar() {
+  const [showProjects, setShowProjects] = useState(true);
   return (
     <div className="sidebar" data-testid="sidebar">
       <ul className="sidebar__generic">
@@ -35,9 +37,9 @@ function Sidebar() {
         </span>
         <h2> Projects</h2>
       </div>
-      <ul className="sidebar__projects">Projects list</ul>
-      <div> Add Project component </div>
-      <Task />
+      <ul className="sidebar__projects">{showProjects && <Projects />}</ul>
+      
+      {/* <Task /> */}
     </div>
   );
 }
