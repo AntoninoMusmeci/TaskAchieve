@@ -11,7 +11,7 @@ function Projects() {
         projects.map((project) => {
           return (
             <li
-              key={project.id}
+              key={project.docId}
               data-testid="project-object"
               data-doc-id={project.docId}
               className={

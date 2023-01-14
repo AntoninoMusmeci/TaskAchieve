@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import firebase from "../firebase";
 export function useTask(taskId) {
   const [tasks, setTasks] = useState([
     { id: 14434, userId: "userfisejfs", date: "", task: "this is a task" },
@@ -8,24 +8,31 @@ export function useTask(taskId) {
   return tasks;
 }
 
-export function useProjects() {
-  const [project, setProjects] = useState([
-    {
-      id: 14434,
-      userId: "userfisejfs",
-      date: "",
-      name: "MUSIC",
-      projectId: 2434,
-      docId: 434,
-    },
-    {
-      id: 14223,
-      userId: "userfisejfs",
-      date: "",
-      name: "VIDEO",
-      projectId: 45,
-      docId: 34,
-    },
-  ]);
-  return [project, setProjects];
-}
+const userId = process.env.REACT_APP_FIREBASE_TEST_USER_ID;
+
+export const useProjects = () => {
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    // debugger;
+    firebase
+      .firestore()
+      .collection("projects")
+      .where("userId", "==", userId)
+      // .orderBy("projectId")
+      .get()
+      .then((snapshot) => {
+        const allProjects = snapshot.docs.map((project) => ({
+          projectId: project.data().projectId,
+          userId: project.data().userId,
+          name: project.data().name,
+          docId: project.id,
+        }));
+        if (JSON.stringify(allProjects) !== JSON.stringify(projects)) {
+          setProjects(allProjects);
+        }
+      });
+  });
+
+  return [projects, setProjects];
+};
