@@ -6,13 +6,14 @@ import {
   FaRegCalendarAlt,
   FaRegCalendar,
 } from "react-icons/fa";
-import Task from "../Task";
+import { useProjectsValue } from "../../context";
 function Sidebar() {
   const [showProjects, setShowProjects] = useState(true);
+  const {setSelectedProject} = useProjectsValue()
   return (
     <div className="sidebar" data-testid="sidebar">
       <ul className="sidebar__generic">
-        <li data-testid="inbox" className="inbox">
+        <li data-testid="inbox" className="inbox" onClick = {() => {setSelectedProject("INBOX")}}>
           <span>
             <FaInbox />
           </span>

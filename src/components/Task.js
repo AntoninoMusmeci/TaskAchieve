@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-
+import { useProjectsValue } from "../context";
 import { useTask } from "../hooks";
 import Checkbox from "./Checkbox";
 function Task() {
-  const tasks = useTask("task");
+  const { selectedProject } = useProjectsValue();
+  const tasks = useTask(selectedProject);
   let projectName = "Task";
 
   return (

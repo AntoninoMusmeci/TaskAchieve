@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useProjectsValue } from "../context";
 import SingleProject from "./SingleProject";
+
 function Projects() {
-  const { projects } = useProjectsValue();
+  const { projects, setSelectedProject } = useProjectsValue();
   const [active, setActive] = useState(false);
-  console.log(projects);
+ 
   return (
     <div>
       {projects &&
@@ -19,6 +20,9 @@ function Projects() {
                   ? "active sidebar__project"
                   : "sidebar__project"
               }
+              onClick={() => {
+                setSelectedProject(project.projectId);
+              }}
             >
               <SingleProject project={project} />
             </li>

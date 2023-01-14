@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { VscDebugBreakpointData } from "react-icons/vsc";
 import { FaTrashAlt } from "react-icons/fa";
+import { useProjectsValue } from "../context";
 function SingleProject({ project }) {
   const [showModal, setShowModal] = useState(false);
   const deleteProject = () => {
     console.log("delete");
   };
+  const {setSelectedProject} = useProjectsValue()
   return (
     <>
       <VscDebugBreakpointData className="sidebar__dot" />
