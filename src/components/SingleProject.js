@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { VscDebugBreakpointData } from "react-icons/vsc";
 import { FaTrashAlt } from "react-icons/fa";
 import { useProjectsValue } from "../context";
+import Modal from "./Modal";
 function SingleProject({ project }) {
   const [showModal, setShowModal] = useState(false);
   const { deleteProject } = useProjectsValue();
@@ -17,18 +18,17 @@ function SingleProject({ project }) {
       >
         <FaTrashAlt />
         {showModal && (
-          <div className="project-delete-modal">
-            <div className="project-delete-modal__content">
-              <h3>Delete Project?</h3>
+          <Modal
+            modalTitle={"Delete Project?"}
+            confirmButtonText="Delete"
+            confirmButtonHandler={() => deleteProject(project.docId)}
+          >
+            <div className="project-delete-modal">
               <p>
                 Are you sure you want to delete <span>{project.name}</span>?
               </p>
-              <div>
-                <button> Cancel </button>
-                <button onClick={() => deleteProject(project.docId)}> Delete </button>
-              </div>
             </div>
-          </div>
+          </Modal>
         )}
       </span>
     </>

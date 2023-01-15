@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useProjectsValue } from "../context";
 import SingleProject from "./SingleProject";
-
+import AddProject from "./AddProject";
 function Projects() {
   const { projects, setSelectedProject } = useProjectsValue();
   const [active, setActive] = useState(false);
+  
  
   return (
     <div>
@@ -28,6 +29,7 @@ function Projects() {
             </li>
           );
         })}
+        <AddProject/>
     </div>
   );
 }
