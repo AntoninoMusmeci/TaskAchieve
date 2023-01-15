@@ -4,10 +4,8 @@ import { FaTrashAlt } from "react-icons/fa";
 import { useProjectsValue } from "../context";
 function SingleProject({ project }) {
   const [showModal, setShowModal] = useState(false);
-  const deleteProject = () => {
-    console.log("delete");
-  };
-  const {setSelectedProject} = useProjectsValue()
+  const { deleteProject } = useProjectsValue();
+
   return (
     <>
       <VscDebugBreakpointData className="sidebar__dot" />
@@ -27,7 +25,7 @@ function SingleProject({ project }) {
               </p>
               <div>
                 <button> Cancel </button>
-                <button onClick={deleteProject}> Delete </button>
+                <button onClick={() => deleteProject(project.docId)}> Delete </button>
               </div>
             </div>
           </div>
