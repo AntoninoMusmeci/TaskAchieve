@@ -1,12 +1,9 @@
-import React, { useState } from "react";
 import { useProjectsValue } from "../context";
 import SingleProject from "./SingleProject";
-import AddProject from "./AddProject";
+
 function Projects() {
-  const { projects, setSelectedProject } = useProjectsValue();
-  const [active, setActive] = useState(false);
-  
- 
+  const { projects, selectedProject, setSelectedProject } = useProjectsValue();
+
   return (
     <div>
       {projects &&
@@ -17,7 +14,7 @@ function Projects() {
               data-testid="project-object"
               data-doc-id={project.docId}
               className={
-                active === project.projectId
+                selectedProject === project.projectId
                   ? "active sidebar__project"
                   : "sidebar__project"
               }
@@ -29,7 +26,6 @@ function Projects() {
             </li>
           );
         })}
-        <AddProject/>
     </div>
   );
 }
