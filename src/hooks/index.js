@@ -19,7 +19,7 @@ export const useTask = (selectedProject) => {
     if (selectedProject && !taskGroupExist(selectedProject))
       task_data = task_data.where("projectId", "==", selectedProject);
     else if (selectedProject === "TODAY")
-      task_data = task_data.wheree("date", "==", moment().format("DD/MM/YYYY"));
+      task_data = task_data.where("date", "==", moment().format("DD/MM/YYYY"));
     else if (selectedProject === "INBOX" || selectedProject === 0)
       task_data = task_data.where("date", "==", "");
 
