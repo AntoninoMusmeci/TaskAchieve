@@ -65,6 +65,7 @@ export const useProjects = () => {
           userId: project.data().userId,
           name: project.data().name,
           docId: project.id,
+          color: project.data().color
         }));
         if (JSON.stringify(allProjects) !== JSON.stringify(projects)) {
           setProjects(allProjects);

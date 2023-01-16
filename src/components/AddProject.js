@@ -3,20 +3,24 @@ import Modal from "./Modal";
 import { FaPlus } from "react-icons/fa";
 import ColorList from "./ColorList";
 import ListElement from "./ListElement";
+import { useProjectsValue } from "../context";
 function AddProject() {
   const [showModal, setShowModal] = useState(false);
   const [showColorList, setShowColorList] = useState(false);
   const [projectName, setProjectName] = useState("");
   const [projectColor, setProjectColor] = useState({ color: "", name: "" });
+  const { addProject } = useProjectsValue();
 
   const addNewProject = () => {
     
-  }
+    addProject(projectColor, projectName)
+  };
+
   useEffect(() => {
     if (showModal === false) {
       setProjectColor({ color: "", name: "" });
-      setShowColorList(false)
-      setProjectName("")
+      setShowColorList(false);
+      setProjectName("");
     }
   }, [showModal]);
   const closeModal = () => {
@@ -33,7 +37,7 @@ function AddProject() {
         <Modal
           modalTitle={"Add New Project"}
           confirmButtonText="Add"
-          confirmButtonHandler={() => console.log("add")}
+          confirmButtonHandler={addNewProject}
           cancelButtonHandler={closeModal}
         >
           <div className="project-add-modal">

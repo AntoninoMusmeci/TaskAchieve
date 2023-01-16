@@ -9,7 +9,7 @@ function SingleProject({ project }) {
 
   return (
     <>
-      <VscDebugBreakpointData className="sidebar__dot" />
+      <VscDebugBreakpointData style={{color:project.color.color}} className="sidebar__dot" />
       <span className="sidebar__project-name"> {project.name}</span>
       <span
         className="sidebar__project-delete"

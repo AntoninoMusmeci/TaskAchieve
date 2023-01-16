@@ -3,7 +3,7 @@ import SingleProject from "./SingleProject";
 
 function Projects() {
   const { projects, selectedProject, setSelectedProject } = useProjectsValue();
-
+  console.log(projects)
   return (
     <div>
       {projects &&
