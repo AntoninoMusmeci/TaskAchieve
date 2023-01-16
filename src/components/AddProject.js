@@ -1,26 +1,75 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
+import { FaPlus } from "react-icons/fa";
+import ColorList from "./ColorList";
+import ListElement from "./ListElement";
 function AddProject() {
   const [showModal, setShowModal] = useState(false);
+  const [showColorList, setShowColorList] = useState(false);
+  const [projectName, setProjectName] = useState("");
+  const [projectColor, setProjectColor] = useState({ color: "", name: "" });
+
+  const addNewProject = () => {
+    
+  }
+  useEffect(() => {
+    if (showModal === false) {
+      setProjectColor({ color: "", name: "" });
+      setShowColorList(false)
+      setProjectName("")
+    }
+  }, [showModal]);
+  const closeModal = () => {
+    setShowModal(!showModal);
+  };
+  const chooseColor = (color) => {
+    setProjectColor(color);
+    setShowColorList(false);
+  };
   return (
-    <div onClick={() => setShowModal(!showModal)}>
-      AddProject
+    <div onClick={() => closeModal()}>
+      <FaPlus />
       {showModal && (
         <Modal
           modalTitle={"Add New Project"}
           confirmButtonText="Add"
           confirmButtonHandler={() => console.log("add")}
+          cancelButtonHandler={closeModal}
         >
-          <form>
-            <div style={{display: "flex", flexDirection: "column"}}>
-            <input type="text" />
-            <input type="text" />
-            <input type="text" />
-            <input type="text" />
-            <input type="text" />
-            </div>
+          <div className="project-add-modal">
+            <form>
+              <div className="project-add-modal__input">
+                <label> Name </label>
+                <input
+                  value={projectName}
+                  onChange={(e) => {
+                    setProjectName(e.target.value);
+                  }}
+                  className="project-add-modal__name"
+                  data-testid="project-name"
+                  type="text"
+                />
+                <div />
+                <div className="project-add-modal__input">
+                  <label> Color </label>
 
-          </form>
+                  <button
+                    className="project-add-modal__color"
+                    data-testid="project-color"
+                    onClick={() => {
+                      setShowColorList(!showColorList);
+                    }}
+                  >
+                    <ListElement
+                      color={projectColor.color}
+                      name={projectColor.name}
+                    />
+                  </button>
+                  {showColorList && <ColorList chooseColor={chooseColor} />}
+                </div>
+              </div>
+            </form>
+          </div>
         </Modal>
       )}
     </div>

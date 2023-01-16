@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');
+
 // general settings
 * {
     box-sizing: border-box;
@@ -10,6 +12,7 @@
 }
 
 body {
+    font-family: "Roboto";
     margin: 0;
     padding: 0;
     line-height: 1;
@@ -62,7 +65,7 @@ $breakpoint: "900px";
 }
 
 @mixin btn($width) {
-    width: $width;
+    min-width: $width;
     // background-color: $generic-bg;
     color: #fff;
     border: 1px solid transparent;
@@ -221,6 +224,10 @@ header {
         }
     }
 
+    .sidebar__project {
+        margin: 5px;
+    }
+
     &__project {
         &-delete {
             margin-left: auto;
@@ -229,7 +236,8 @@ header {
             // display: none;
             svg {
                 color: #cacaca;
-                font-size: 15px
+                font-size: 15px;
+                // display: none;
             }
         }
 
@@ -271,15 +279,29 @@ header {
     &__middle {
         margin-top: 20px;
         margin-bottom: 20px;
+        padding-bottom: 10px;
         display: flex;
         border-bottom: $generic-border;
+        align-items: center;
         cursor: pointer;
 
-        span {
-            color: #0000008a;
+        >span {
+            width: 100%;
+            @include va('right');
+            gap: 15px;
+            color: #cacaca;
             margin-right: 10px;
 
-            svg.hidden-projects {
+            svg {
+                // display: none;
+                font-size: 15px;
+
+                &:hover {
+                    color: #555;
+                }
+            }
+
+            svg.projects-hide {
                 -webkit-transform: rotate(-90deg);
                 transform: rotate(-90deg);
             }
@@ -287,10 +309,9 @@ header {
 
         h2 {
             margin: 0;
-            color: #333;
+            color: rgba(0, 0, 0, 0.56);
             font-size: 15px;
             font-weight: bold;
-            padding-bottom: 20px;
         }
     }
 
@@ -336,8 +357,9 @@ header {
         flex-direction: column;
         border-radius: 10px;
         background-color: white;
+        color: black;
 
-        &-title{
+        &-title {
             margin-top: 0;
         }
 
@@ -346,7 +368,7 @@ header {
             @include va('right');
 
             button:nth-child(1) {
-                @include btn("50px");
+                @include btn(70px);
                 color: #555;
 
                 &:hover {
@@ -355,7 +377,7 @@ header {
             }
 
             button:nth-child(2) {
-                @include btn("50px");
+                @include btn(70px);
                 background-color: $generic-bg;
 
                 &:hover {
@@ -380,6 +402,57 @@ header {
         span {
             font-weight: bold;
         }
+    }
+}
+
+/* Add Modal 
+  ============================================ */
+.project-add-modal {
+    &__input {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__name,
+
+    &__color {
+        border-radius: 5px;
+        height: 30px;
+        border: 1px solid #cacaca;
+        width: 450px;
+        
+    }
+    &__color{
+        cursor: pointer;
+        background-color: transparent;
+    }
+}
+.project-add-modal__color-list{
+    overflow-y: scroll;
+    max-height: 225px;
+    position:absolute;
+    background-color: white;
+    width: 450px;
+    top:418px;
+    line-height: 2.0;
+    
+}
+/* ListElement
+========================================================= */
+.list-element {
+    cursor: pointer;
+    flex-direction: row;
+    @include va("left");
+    gap: 15px;
+    span  &__dot { 
+        width: 12px;
+        height: 12px;
+        border-radius: 12px;
+        margin-left: 10px;
+    }
+    &:hover{
+        background-color: #cacaca;
     }
 }
 
