@@ -12,8 +12,8 @@ function AddProject() {
   const { addProject } = useProjectsValue();
 
   const addNewProject = () => {
-    
-    addProject(projectColor, projectName)
+    addProject(projectColor, projectName);
+    setShowModal(false)
   };
 
   useEffect(() => {
@@ -41,38 +41,36 @@ function AddProject() {
           cancelButtonHandler={closeModal}
         >
           <div className="project-add-modal">
-            <form>
+            <div className="project-add-modal__input">
+              <label> Name </label>
+              <input
+                value={projectName}
+                onChange={(e) => {
+                  setProjectName(e.target.value);
+                }}
+                className="project-add-modal__name"
+                data-testid="project-name"
+                type="text"
+              />
+              <div />
               <div className="project-add-modal__input">
-                <label> Name </label>
-                <input
-                  value={projectName}
-                  onChange={(e) => {
-                    setProjectName(e.target.value);
-                  }}
-                  className="project-add-modal__name"
-                  data-testid="project-name"
-                  type="text"
-                />
-                <div />
-                <div className="project-add-modal__input">
-                  <label> Color </label>
+                <label> Color </label>
 
-                  <button
-                    className="project-add-modal__color"
-                    data-testid="project-color"
-                    onClick={() => {
-                      setShowColorList(!showColorList);
-                    }}
-                  >
-                    <ListElement
-                      color={projectColor.color}
-                      name={projectColor.name}
-                    />
-                  </button>
-                  {showColorList && <ColorList chooseColor={chooseColor} />}
-                </div>
+                <button
+                  className="project-add-modal__color"
+                  data-testid="project-color"
+                  onClick={() => {
+                    setShowColorList(!showColorList);
+                  }}
+                >
+                  <ListElement
+                    color={projectColor.color}
+                    name={projectColor.name}
+                  />
+                </button>
+                {showColorList && <ColorList chooseColor={chooseColor} />}
               </div>
-            </form>
+            </div>
           </div>
         </Modal>
       )}

@@ -3,7 +3,6 @@ import SingleProject from "./SingleProject";
 
 function Projects() {
   const { projects, selectedProject, setSelectedProject } = useProjectsValue();
-  console.log(projects)
   return (
     <div>
       {projects &&
@@ -19,6 +18,7 @@ function Projects() {
                   : "sidebar__project"
               }
               onClick={() => {
+
                 setSelectedProject(project.projectId);
               }}
             >

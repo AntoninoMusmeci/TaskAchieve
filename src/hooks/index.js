@@ -10,7 +10,7 @@ export const useTask = (selectedProject) => {
   const [archivedTasks, setArchivedTasks] = useState([]);
 
   useEffect(() => {
-    console.log("useEffect")
+    console.log("fetch tasks")
     let task_data = firebase
       .firestore()
       .collection("tasks")
@@ -43,8 +43,6 @@ export const useTask = (selectedProject) => {
 
     return () => task_data();
   }, [selectedProject]);
-  console.log(tasks);
-
   return tasks;
 };
 
@@ -52,6 +50,7 @@ export const useProjects = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
+    console.log("fetch projects")
     // debugger;
     firebase
       .firestore()
@@ -65,13 +64,13 @@ export const useProjects = () => {
           userId: project.data().userId,
           name: project.data().name,
           docId: project.id,
-          color: project.data().color
+          color: project.data().color.color
         }));
         if (JSON.stringify(allProjects) !== JSON.stringify(projects)) {
           setProjects(allProjects);
         }
       });
-  });
+  },[projects]);
 
   return [projects, setProjects];
 };

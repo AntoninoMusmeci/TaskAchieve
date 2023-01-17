@@ -33,16 +33,15 @@ $breakpoint: "900px";
 
 /* Mixins
   ============================================ */
-@mixin box-overlay() {
-    -webkit-box-shadow: $generic-box-shadow;
-    box-shadow: $generic-box-shadow;
-    position: absolute;
-    width: 100%;
-    z-index: 1;
-    top: 85px;
-    border-radius: 3px;
-}
-
+// @mixin box-overlay() {
+//     -webkit-box-shadow: $generic-box-shadow;
+//     box-shadow: $generic-box-shadow;
+//     position: absolute;
+//     width: 100%;
+//     z-index: 1;
+//     top: 85px;
+//     border-radius: 3px;
+// }
 @mixin va($va-align: center) {
     display: flex;
     align-items: center;
@@ -415,29 +414,29 @@ header {
     }
 
     &__name,
-
     &__color {
         border-radius: 5px;
         height: 30px;
         border: 1px solid #cacaca;
         width: 450px;
-        
     }
-    &__color{
+
+    &__color {
         cursor: pointer;
         background-color: transparent;
     }
 }
-.project-add-modal__color-list{
+
+.project-add-modal__color-list {
     overflow-y: scroll;
     max-height: 225px;
-    position:absolute;
+    position: absolute;
     background-color: white;
     width: 450px;
-    top:418px;
+    top: 418px;
     line-height: 2.0;
-    
 }
+
 /* ListElement
 ========================================================= */
 .list-element {
@@ -445,20 +444,22 @@ header {
     flex-direction: row;
     @include va("left");
     gap: 15px;
-    span  &__dot { 
+
+    span &__dot {
         width: 12px;
         height: 12px;
         border-radius: 12px;
         margin-left: 10px;
     }
-    &:hover{
+
+    &:hover {
         background-color: #cacaca;
     }
 }
 
 /* Tasks
 ========================================================= */
-.task {
+.tasks {
     @include mq($breakpoint) {
         margin-left: 85px;
         width: auto;
@@ -499,5 +500,173 @@ header {
                 border-radius: 16px;
             }
         }
+    }
+
+    &__add-task {
+        display: flex;
+        line-height: 20px;
+        padding: 15px 0px 10px 0px;
+        font-size: 15px;
+        color: #dd4b39;
+        cursor: pointer;
+
+        &:hover &-plus {
+            background-color: #dd4b39;
+            color: white;
+        }
+
+        &-plus {
+            margin-right: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+    }
+}
+
+/* AddTasks
+========================================================= */
+.add-task {
+    &__setting {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 5px;
+
+        input {
+            width: 100%;
+            border: none;
+            outline: none;
+        }
+
+        border: 1px solid #cacaca;
+        gap: 10px;
+    }
+
+    &__setting-buttons {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+
+        button {
+            // display: flex;
+            // align-items: center;
+            position: relative;
+            cursor: pointer;
+            @include va;
+            gap: 5px;
+            background-color: transparent;
+            border: 1px solid #cacaca;
+            border-radius: 5px;
+            height: 30px;
+        }
+    }
+
+    &__add {
+        @include va("right");
+        gap: 10px;
+        padding-top: 10px;
+
+        // button{
+        //     cursor: pointer;
+        //     gap: 5px;
+        //     background-color: transparent;
+        //     border: 1px solid #cacaca;
+        //     border-radius: 5px;
+        //     height: 30px;
+        // }
+        // button:nth-child(2){
+        //     background-color: red;
+        //     color: white
+        // }
+        button {
+            @include btn("70");
+            color: #555;
+        }
+
+        button:nth-child(2) {
+            background-color: #db4c3f;
+            color: white
+        }
+
+        button:nth-child(2):disabled {
+            background-color: #f1b7b2;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.add-task-absolute {
+    background-color: white;
+    position: absolute;
+    width: 500px;
+    top: 100px;
+    left: 50%;
+    border-radius: 10px;
+    box-shadow: 0 15px 50px 0 rgb(0 0 0 / 35%);
+    padding: 10px 10px 30px 10px;
+    transform: translate(-50%);
+}
+
+/* Task Date
+  ============================================ */
+.task-date {
+    position: absolute;
+    top: 30px;
+    width: 200px;
+    left: 0;
+    background-color: #fff;
+
+    &__list li {
+        @include task-item();
+        padding: 0;
+
+        div:nth-child(1) {
+            padding: 10px;
+            width: 100%;
+            display: flex;
+
+            span:first-of-type {
+                margin-right: 10px;
+
+                svg {
+                    fill: grey;
+                }
+            }
+        }
+    }
+}
+
+.data-picker{
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    &__header{
+       
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    div{
+        @include va("right") 
+    }
+    &__week{
+        color:red;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
+    }   
+    &__element{
+        // border: 1px solid black;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
     }
 }

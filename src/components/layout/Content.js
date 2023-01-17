@@ -1,11 +1,11 @@
 import React from "react";
 import Sidebar from "./Sidebar";
-import Task from "../Task";
+import Tasks from "../Tasks";
 function Content() {
   return (
     <section className="content">
       <Sidebar />
-      <Task />
+      <Tasks />
     </section>
   );
 }

@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { useProjects } from "../hooks";
 import firebase from "../firebase";
-
+import {v4 as uuidv4} from 'uuid';
 export const ProjectsContext = createContext();
 export const ProjectsProvider = ({ children }) => {
   const [projects, setProjects] = useProjects();
@@ -14,7 +14,6 @@ export const ProjectsProvider = ({ children }) => {
       .doc(docId)
       .delete()
       .then(() => {
-        console.log(projects);
         setProjects([...projects]);
         setSelectedProject("INBOX");
       });
@@ -28,6 +27,7 @@ export const ProjectsProvider = ({ children }) => {
         name: projectName,
         color: projectColor,
         userId: "2vUUm9oXjDn16lzz3MlG",
+        projectId:uuidv4()
       })
       .then(() => [setProjects([...projects])]);
   };

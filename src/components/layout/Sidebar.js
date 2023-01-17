@@ -12,7 +12,6 @@ import { useProjectsValue } from "../../context";
 function Sidebar() {
   const [showProjects, setShowProjects] = useState(true);
   const { selectedProject, setSelectedProject } = useProjectsValue();
-  console.log(selectedProject);
   return (
     <div className="sidebar" data-testid="sidebar">
       <ul className="sidebar__generic">
