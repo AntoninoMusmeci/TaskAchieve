@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useProjectsValue } from "../context";
-import { useTask } from "../hooks";
+import { useProjectsValue, useTasksValue } from "../context";
 import Checkbox from "./Checkbox";
 import { getProjectName } from "../utilities";
 import AddTask from "./AddTask";
 function Tasks() {
   const { selectedProject, projects } = useProjectsValue();
+  const {useTask} = useTasksValue()
   const tasks = useTask(selectedProject);
   const [showMainAddTask, setShowMainAddTask] = useState(false);
   const projectName = getProjectName(projects, selectedProject);
