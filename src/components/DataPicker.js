@@ -1,16 +1,31 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment/moment";
-function DataPicker() {
+function DataPicker({setDate}) {
   const weekdays = ["S", "M", "T", "W", "T", "F", "S"];
   const [currentDate, setCurrentDate] = useState(moment());
   const [month, setMonth] = useState();
   const [year, setYear] = useState();
   const [days, setDays] = useState([]);
+  const [selectedDay,setSelectedDay] = useState()
   const updateMonth = (n) => {
     const date = moment(currentDate);
     date.add(n, "M");
     setCurrentDate(date);
+
   };
+
+  const selectDay = (day) => {
+    console.log(day)
+    let date = day +  "/" + month + "/" + year
+    date = moment(date).format("DD/MM/YYYY")
+    if(selectedDay === day){
+      setSelectedDay("")
+    }
+    else setSelectedDay(day)
+  }
+  useEffect(() => {
+    setDate(selectedDay)
+  }, [setDate,selectedDay])
 
   useEffect(() => {
     console.log("useEffect");
@@ -27,8 +42,8 @@ function DataPicker() {
     let week = [];
     
     while (start < end) {
-      console.log( start.format("MMM"), month) 
-      const day = start.format("MMM") === currentMonth ? start.format("D") : ""
+       
+      const day = start.format("MMM") === currentMonth ? start.format("DD/MM/YYYY") : undefined
       week.push(day);
       if (start.day() === 6) {
         days.push(week);
@@ -75,7 +90,9 @@ function DataPicker() {
  
             <ul className="data-picker__week">
               {week.map((day,index) => (
-                <li className="data-picker__element" key ={index}>{day}</li>
+                <li className={day ? day === selectedDay ? "data-picker__element active" : "data-picker__element selectable" : "data-picker__element"} key ={index}
+                onClick = {() => selectDay(day)}
+                >{day?.split("/")[0]}</li>
               ))}
             </ul>
    

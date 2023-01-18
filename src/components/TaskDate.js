@@ -1,20 +1,21 @@
 import moment from "moment/moment";
-import React from "react";
+import React, {useState} from "react";
 import { FaSpaceShuttle, FaSun, FaRegPaperPlane } from "react-icons/fa";
 import { MdWeekend } from "react-icons/md";
 import DataPicker from "./DataPicker";
 
-function TaskDate() {
-  const date = moment()
+function TaskDate({ setDate}) {
+  
+  // const date = moment();
   return (
     <div className="task-date" data-testid="task-date-overlay">
       <ul className="task-date__list">
         <li>
           <div
-            // onClick={() => {
-            //   setShowTaskDate(false);
-            //   setTaskDate(moment().format('DD/MM/YYYY'));
-            // }}
+            onClick={() => {
+              // setShowTaskDate(false);
+              setDate(moment().format('DD/MM/YYYY'));
+            }}
 
             data-testid="task-date-today"
             tabIndex={0}
@@ -29,10 +30,10 @@ function TaskDate() {
         </li>
         <li>
           <div
-            // onClick={() => {
-            //   setShowTaskDate(false);
-            //   setTaskDate(moment().format('DD/MM/YYYY'));
-            // }}
+            onClick={() => {
+              // setShowTaskDate(false);
+              setDate(moment().add(1,"d").format('DD/MM/YYYY'));
+            }}
 
             data-testid="task-date-today"
             tabIndex={0}
@@ -42,7 +43,7 @@ function TaskDate() {
             <span>
               <MdWeekend />
             </span>
-            <span>This Weekend</span>
+            <span>Tomorrow</span>
           </div>
         </li>
         <li>
@@ -63,9 +64,8 @@ function TaskDate() {
             <span>Next week</span>
           </div>
         </li>
-        <li>
-         <DataPicker />
-        </li>
+
+        <DataPicker setDate={setDate}/>
       </ul>
     </div>
   );

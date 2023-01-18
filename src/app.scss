@@ -618,7 +618,7 @@ header {
 .task-date {
     position: absolute;
     top: 30px;
-    width: 200px;
+    // width: 200px;
     left: 0;
     background-color: #fff;
 
@@ -656,17 +656,30 @@ header {
         @include va("right") 
     }
     &__week{
-        color:red;
+
         display: flex;
         flex-direction: row;
         gap: 10px;
 
     }   
     &__element{
-        // border: 1px solid black;
-        width: 20px;
-        height: 20px;
+    
+        width: 30px;
+        height: 30px;
         display: flex;
         justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+
+        &.active{
+            background-color: red !important;
+        }
+        &.selectable{
+            &:hover{
+                background-color: gray !important;
+            }
+        }
     }
+
+
 }
