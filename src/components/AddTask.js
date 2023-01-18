@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaRegListAlt, FaRegCalendarAlt } from "react-icons/fa";
 import { useProjectsValue } from "../context";
 import moment from "moment/moment";
@@ -6,9 +6,12 @@ import TaskDate from "./TaskDate";
 function AddTask({ showMainAddTask, setShowMainAddTask, projectName = "" }) {
   const [taskName, setTaskName] = useState("");
   const [showTaskDate, setShowTaskDate] = useState(false);
-  const [date, setDate] = useState()
+  const [date, setDate] = useState();
   // const {selectedProject} = useProjectsValue()
- 
+  useEffect(() => {
+    console.log("useEffectdate");
+    setShowTaskDate(false);
+  }, [date]);
   return (
     <div className={showMainAddTask ? "add-task" : "add-task-absolute"}>
       <div className="add-task__setting">
@@ -22,8 +25,13 @@ function AddTask({ showMainAddTask, setShowMainAddTask, projectName = "" }) {
         </div>
         <div className="add-task__setting-buttons">
           <button onClick={() => setShowTaskDate(true)}>
-            {showTaskDate && <TaskDate setDate = {setDate}/>} <FaRegCalendarAlt /> {
-            date === moment().format("DD/MM/YYYY") ? "Today" : date === moment().add(1,"d").format("DD/MM/YYYY") ? "Tomorrow": date}
+            {showTaskDate && <TaskDate setDate={setDate} date={date} />}{" "}
+            <FaRegCalendarAlt />{" "}
+            {date === moment().format("DD/MM/YYYY")
+              ? "Today"
+              : date === moment().add(1, "d").format("DD/MM/YYYY")
+              ? "Tomorrow"
+              : date}
           </button>
 
           <button>

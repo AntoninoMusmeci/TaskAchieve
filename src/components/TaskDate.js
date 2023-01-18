@@ -4,7 +4,7 @@ import { FaSpaceShuttle, FaSun, FaRegPaperPlane } from "react-icons/fa";
 import { MdWeekend } from "react-icons/md";
 import DataPicker from "./DataPicker";
 
-function TaskDate({ setDate}) {
+function TaskDate({ date, setDate}) {
   
   // const date = moment();
   return (
@@ -65,7 +65,7 @@ function TaskDate({ setDate}) {
           </div>
         </li>
 
-        <DataPicker setDate={setDate}/>
+        <DataPicker setDate={setDate} date= {date}/>
       </ul>
     </div>
   );
