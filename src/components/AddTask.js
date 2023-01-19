@@ -4,15 +4,45 @@ import { useProjectsValue, useTasksValue } from "../context";
 import moment from "moment/moment";
 import TaskDate from "./TaskDate";
 
-function AddTask({ showMainAddTask, setShowMainAddTask, projectName = "" }) {
-  const [taskName, setTaskName] = useState("");
+function AddTask({
+  showMainAddTask,
+  setShowMainAddTask,
+  projectName = "",
+  setShowHeaderAddTask,
+  showEditTask = false,
+  task = "",
+}) {
+ 
+  const [taskName, setTaskName] = useState(showEditTask ? task.task : "");
   const [showTaskDate, setShowTaskDate] = useState(false);
   const [date, setDate] = useState("");
-  const { addTask } = useTasksValue();
+  const { addTask, editTask } = useTasksValue();
   const { selectedProject } = useProjectsValue();
+  const createNewTask = () => {
+    const newTask = {
+      archived: false,
+      projectId: selectedProject,
+      task: taskName,
+      date: date,
+    };
+    addTask(newTask);
+    setDate("");
+    setTaskName("");
+  };
 
+  const updateTask = () => {
+    const newTask = {
+      archived: false,
+      projectId: task.projectId,
+      task: taskName,
+      date: date !== task.date ? date : task.date,
+    };
+    editTask(task, newTask)
+    setShowMainAddTask(false)
+    setDate("");
+    setTaskName("");
+  };
   useEffect(() => {
-    console.log("useEffectdate");
     setShowTaskDate(false);
   }, [date]);
   return (
@@ -20,6 +50,7 @@ function AddTask({ showMainAddTask, setShowMainAddTask, projectName = "" }) {
       <div className="add-task__setting">
         <div>
           <input
+            value={taskName}
             onChange={(e) => {
               setTaskName(e.target.value);
             }}
@@ -60,12 +91,12 @@ function AddTask({ showMainAddTask, setShowMainAddTask, projectName = "" }) {
         </div>
       </div>
       <div className="add-task__add">
-        <button onClick={() => setShowMainAddTask(false)}> Cancel </button>
+        <button onClick={() => {showMainAddTask ? setShowMainAddTask(false) : setShowHeaderAddTask(false)}}> Cancel </button>
         <button
-          onClick={() => addTask(taskName, date, selectedProject)}
+          onClick={showEditTask ? updateTask : createNewTask}
           disabled={taskName ? false : true}
         >
-          Add Task
+          {showEditTask ? "Save" : "Add Task"}
         </button>
       </div>
     </div>

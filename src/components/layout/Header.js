@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import AddTask from "../AddTask";
 function Header() {
-  const [showMainAddTask, setShowMainAddTask] = useState(false);
+  const [showAddTask, setShowAddTask] = useState(false);
   return (
     <header className="header" data-testid="header">
       <nav>
@@ -14,7 +14,7 @@ function Header() {
             <li
               className="settings__add"
               onClick={() => {
-                setShowMainAddTask(!showMainAddTask);
+                setShowAddTask(!showAddTask);
               }}
             >
               +
@@ -25,10 +25,10 @@ function Header() {
           </ul>
         </div>
       </nav>
-      {showMainAddTask && (
+      {showAddTask && (
         <div
           onClick={() => {
-            setShowMainAddTask(!showMainAddTask);
+            setShowAddTask(!showAddTask);
           }}
           style={{ position: "fixed", width: "100%", height: "100%" }}
         >
@@ -37,7 +37,7 @@ function Header() {
               e.stopPropagation();
             }}
           >
-            <AddTask />
+            <AddTask setShowHeaderAddTask = {setShowAddTask}/>
           </div>
         </div>
       )}

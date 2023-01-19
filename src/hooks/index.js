@@ -20,12 +20,16 @@ export const useTask = (selectedProject) => {
       task_data = task_data.where("projectId", "==", selectedProject);
     else if (selectedProject === "TODAY")
       task_data = task_data.where("date", "==", moment().format("DD/MM/YYYY"));
-    else if (selectedProject === "INBOX" || selectedProject === 0)
+    else if (selectedProject === "INBOX")
       task_data = task_data.where("date", "==", "");
+    else if (selectedProject === "ARCHIVED")
+      task_data = task_data.where("archived", "==", true );
+
 
     task_data = task_data.onSnapshot((snapshot) => {
       const newTasks = snapshot.docs.map((task) => ({
-        id: task.id,
+        docId: task.id,
+        id: task.data().id,
         ...task.data(),
       }));
 
@@ -43,7 +47,7 @@ export const useTask = (selectedProject) => {
 
     return () => task_data();
   }, [selectedProject]);
-  return tasks;
+  return [tasks, setTasks,archivedTasks, setArchivedTasks];
 };
 
 export const useProjects = () => {

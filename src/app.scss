@@ -31,17 +31,9 @@ $generic-border: 1px solid #f1f1f1;
 $generic-bg: #db4c3f;
 $breakpoint: "900px";
 $hover-color: #eeeeee;
+
 /* Mixins
   ============================================ */
-// @mixin box-overlay() {
-//     -webkit-box-shadow: $generic-box-shadow;
-//     box-shadow: $generic-box-shadow;
-//     position: absolute;
-//     width: 100%;
-//     z-index: 1;
-//     top: 85px;
-//     border-radius: 3px;
-// }
 @mixin va($va-align: center) {
     display: flex;
     align-items: center;
@@ -65,7 +57,6 @@ $hover-color: #eeeeee;
 
 @mixin btn($width) {
     min-width: $width;
-    // background-color: $generic-bg;
     color: #fff;
     border: 1px solid transparent;
     margin-right: 5px;
@@ -434,7 +425,7 @@ header {
         margin-left: 85px;
         width: auto;
     }
-
+    @include no-select();
     width: 600px;
     background-color: white;
     margin-left: 375px;
@@ -446,14 +437,43 @@ header {
         margin-bottom: 25px;
     }
 
+
     &__list li {
         display: flex;
+        gap: 10px;
+        cursor: pointer;
         line-height: 20px;
         color: #333;
         padding: 10px 0px 10px 0px;
         font-size: 15px;
         list-style-type: none;
         border-bottom: 1px solid #f0f0f0;
+
+        .task__wrapper {
+            width: 100%;
+            &:hover .task__edit {
+                display: inline
+            }
+
+            display: flex;
+
+            .task__description {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                &-date{
+                    font-size: 10px;
+                }
+       
+            }
+
+            .task__edit {
+                cursor: pointer;
+                font-size: 30px;
+                color: #cacaca;
+                display: none;
+            }
+        }
 
         .checkbox-holder {
             display: flex;
@@ -481,7 +501,7 @@ header {
         cursor: pointer;
 
         &:hover &-plus {
-            background-color:$generic-bg;
+            background-color: $generic-bg;
             color: white;
         }
 
@@ -524,8 +544,6 @@ header {
         gap: 5px;
 
         button {
-            // display: flex;
-            // align-items: center;
             position: relative;
             cursor: pointer;
             @include va;
@@ -541,13 +559,14 @@ header {
         @include va("right");
         gap: 10px;
         padding-top: 10px;
+
         button {
             @include btn("70");
             color: #555;
         }
 
         button:nth-child(2) {
-            background-color:$generic-bg;
+            background-color: $generic-bg;
             color: white
         }
 
@@ -575,11 +594,11 @@ header {
 .task-date {
     position: absolute;
     top: 30px;
-    // width: 200px;
     left: 0;
     background-color: #fff;
 
     &__list li {
+       
         @include task-item();
         padding: 0;
 
@@ -599,28 +618,28 @@ header {
     }
 }
 
-.data-picker{
+.data-picker {
     font-size: 20px;
     display: flex;
     flex-direction: column;
-    &__header{
-       
+
+    &__header {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
     }
-    div{
-        @include va("right") 
-    }
-    &__week{
 
+    div {
+        @include va("right")
+    }
+
+    &__week {
         display: flex;
         flex-direction: row;
         gap: 10px;
+    }
 
-    }   
-    &__element{
-    
+    &__element {
         width: 30px;
         height: 30px;
         display: flex;
@@ -628,15 +647,14 @@ header {
         align-items: center;
         border-radius: 15px;
 
-        &.active{
+        &.active {
             background-color: $generic-bg !important;
         }
-        &.selectable{
-            &:hover{
+
+        &.selectable {
+            &:hover {
                 background-color: $hover-color !important;
             }
         }
     }
-
-
 }

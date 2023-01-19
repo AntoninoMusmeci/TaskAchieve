@@ -5,7 +5,7 @@ import {
   FaInbox,
   FaRegCalendarAlt,
   FaRegCalendar,
-  
+  FaCheckCircle,
 } from "react-icons/fa";
 import AddProject from "../AddProject";
 import { useProjectsValue } from "../../context";
@@ -50,6 +50,18 @@ function Sidebar() {
             <FaRegCalendarAlt />
           </span>
           <span> Week</span>
+        </li>
+        <li
+          data-testid="completed"
+          className={selectedProject === "COMPLETED" ? "active" : ""}
+          onClick={() => {
+            setSelectedProject("COMPLETED");
+          }}
+        >
+          <span>
+            <FaCheckCircle />
+          </span>
+          <span> Completed</span>
         </li>
       </ul>
       <div
