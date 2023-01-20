@@ -6,6 +6,7 @@ export const ProjectsContext = createContext();
 export const ProjectsProvider = ({ children }) => {
   const [projects, setProjects] = useProjects();
   const [selectedProject, setSelectedProject] = useState("INBOX");
+  const [show,setShow] = useState(true)
 
   const deleteProject = (docId) => {
     firebase
@@ -41,6 +42,8 @@ export const ProjectsProvider = ({ children }) => {
         selectedProject,
         setSelectedProject,
         addProject,
+        show,
+        setShow
       }}
     >
       {children}
