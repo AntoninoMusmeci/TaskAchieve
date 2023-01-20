@@ -7,10 +7,10 @@ const userId = process.env.REACT_APP_FIREBASE_TEST_USER_ID;
 
 export const useTask = (selectedProject) => {
   const [tasks, setTasks] = useState([]);
-  const [archivedTasks, setArchivedTasks] = useState([]);
+  console.log(selectedProject)
 
   useEffect(() => {
-    console.log("fetch tasks")
+    console.log("fetch tasks");
     let task_data = firebase
       .firestore()
       .collection("tasks")
@@ -22,17 +22,16 @@ export const useTask = (selectedProject) => {
       task_data = task_data.where("date", "==", moment().format("DD/MM/YYYY"));
     else if (selectedProject === "INBOX")
       task_data = task_data.where("date", "==", "");
-    else if (selectedProject === "ARCHIVED")
-      task_data = task_data.where("archived", "==", true );
-
-
+    else if (selectedProject === "COMPLETED")
+      task_data = task_data.where("archived", "==", true);
+    
     task_data = task_data.onSnapshot((snapshot) => {
       const newTasks = snapshot.docs.map((task) => ({
         docId: task.id,
         id: task.data().id,
         ...task.data(),
       }));
-
+      
       setTasks(
         selectedProject === "WEEK"
           ? newTasks.filter(
@@ -40,27 +39,26 @@ export const useTask = (selectedProject) => {
                 moment(task.date, "DD-MM-YYYY").diff(moment(), "days") <= 7 &&
                 task.archived !== true
             )
-          : newTasks.filter((task) => task.archived !== true)
+          : selectedProject !== "COMPLETED" ? newTasks.filter((task) => task.archived !== true) : newTasks
       );
-      setArchivedTasks(newTasks.filter((task) => task.archived !== false));
+
     });
 
     return () => task_data();
   }, [selectedProject]);
-  return [tasks, setTasks,archivedTasks, setArchivedTasks];
+  return [tasks, setTasks];
 };
 
 export const useProjects = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    console.log("fetch projects")
-    // debugger;
+    console.log("fetch projects");
+
     firebase
       .firestore()
       .collection("projects")
       .where("userId", "==", userId)
-      // .orderBy("projectId")
       .get()
       .then((snapshot) => {
         const allProjects = snapshot.docs.map((project) => ({
@@ -68,13 +66,13 @@ export const useProjects = () => {
           userId: project.data().userId,
           name: project.data().name,
           docId: project.id,
-          color: project.data().color.color
+          color: project.data().color.color,
         }));
         if (JSON.stringify(allProjects) !== JSON.stringify(projects)) {
           setProjects(allProjects);
         }
       });
-  },[projects]);
+  }, [projects]);
 
   return [projects, setProjects];
 };

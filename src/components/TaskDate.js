@@ -26,7 +26,6 @@ function TaskDate({ date, setDate }) {
         <li>
           <div
             onClick={() => {
-              // setShowTaskDate(false);
               setDate(moment().add(1, "d").format("DD/MM/YYYY"));
             }}
             data-testid="task-date-today"
@@ -42,11 +41,6 @@ function TaskDate({ date, setDate }) {
         </li>
         <li>
           <div
-            // onClick={() => {
-            //   setShowTaskDate(false);
-            //   setTaskDate(moment().format('DD/MM/YYYY'));
-            // }}
-
             data-testid="task-date-today"
             tabIndex={0}
             aria-label="Select today as the task date"

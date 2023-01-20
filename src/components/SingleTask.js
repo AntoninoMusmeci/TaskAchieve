@@ -3,12 +3,9 @@ import Checkbox from "./Checkbox";
 import AddTask from "./AddTask";
 import { AiOutlineEdit } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
-import { Reorder, useDragControls } from "framer-motion";
-import { GrDrag } from "react-icons/gr";
 import { useTasksValue } from "../context";
 function SingleTask({ task }) {
   const { deleteTask } = useTasksValue();
-  const controls = useDragControls();
   const [showEditTask, setShowEditTask] = useState(false);
   return !showEditTask ? (
     <li>

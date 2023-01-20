@@ -3,6 +3,7 @@ export const taskGroups = [
     { key: 'INBOX', name: 'Inbox' },
     { key: 'TODAY', name: 'Today' },
     { key: 'WEEK', name: 'Week' },
+    { key: 'COMPLETED', name: 'Completed' },
   ];
 export const taskGroupExist = (selectedProject) => {
     return taskGroups.find(task => task.key === selectedProject)

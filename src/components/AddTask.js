@@ -3,7 +3,7 @@ import { FaRegListAlt, FaRegCalendarAlt } from "react-icons/fa";
 import { useProjectsValue, useTasksValue } from "../context";
 import moment from "moment/moment";
 import TaskDate from "./TaskDate";
-
+import ProjectList from "./ProjectList";
 function AddTask({
   showMainAddTask,
   setShowMainAddTask,
@@ -12,9 +12,10 @@ function AddTask({
   showEditTask = false,
   task = "",
 }) {
- 
+  const [project, setProject] = useState()
   const [taskName, setTaskName] = useState(showEditTask ? task.task : "");
   const [showTaskDate, setShowTaskDate] = useState(false);
+  const [showTaskList, setShowTaskList] = useState(false)
   const [date, setDate] = useState("");
   const { addTask, editTask } = useTasksValue();
   const { selectedProject } = useProjectsValue();
@@ -45,6 +46,10 @@ function AddTask({
   useEffect(() => {
     setShowTaskDate(false);
   }, [date]);
+
+  useEffect(() => {
+    setShowTaskList(false);
+  }, [project]);
   return (
     <div className={showMainAddTask ? "add-task" : "add-task-absolute"}>
       <div className="add-task__setting">
@@ -76,8 +81,8 @@ function AddTask({
                 ></div>
                 <TaskDate setDate={setDate} date={date} />
               </div>
-            )}{" "}
-            <FaRegCalendarAlt />{" "}
+            )}
+            <FaRegCalendarAlt />
             {date === moment().format("DD/MM/YYYY")
               ? "Today"
               : date === moment().add(1, "d").format("DD/MM/YYYY")
@@ -85,8 +90,28 @@ function AddTask({
               : date}
           </button>
 
-          <button>
-            <FaRegListAlt /> {projectName}{" "}
+     
+          <button onClick={() => setShowTaskList(true)}>
+            {showTaskList && (
+              <div onClick={(e) => e.stopPropagation()}>
+                <div
+                  style={{
+                    cursor: "default",
+                    top: 0,
+                    left: 0,
+                    position: "fixed",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                  onClick={() => {
+                    setShowTaskList(false);
+                  }}
+                ></div>
+                <ProjectList setProject={setProject} />
+              </div>
+            )}
+   
+            <FaRegListAlt /> {project? project.name : projectName}
           </button>
         </div>
       </div>

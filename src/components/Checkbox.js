@@ -1,8 +1,10 @@
 import React from "react";
-
-function Checkbox({ id }) {
+import { useTasksValue } from "../context";
+function Checkbox({ task }) {
+  const {editTask} = useTasksValue()
   const archiveTask = () => {
-    // update the task with archived = true
+    const newTask = {...task, archived: true}
+    editTask(task,newTask)
   };
   return (
     <div
