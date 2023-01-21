@@ -7,7 +7,7 @@ import {
   cleanup,
 } from "@testing-library/react";
 import Checkbox from "../components/Checkbox";
-
+import { renderWithContext, mockUseContext, mockContext } from "../utilities";
 beforeEach(cleanup);
 
 jest.mock("../firebase", () => ({
@@ -22,32 +22,23 @@ jest.mock("../firebase", () => ({
   },
 }));
 
-const TasksContext = createContext();
-const mockTaskContext = TasksContext;
-const mockUseContext = useContext;
 
-const renderWithContext = (id) => {
-  return render(
-    <mockTaskContext.Provider value={{ editTask: () => {} }}>
-      <Checkbox id={id} />
-    </mockTaskContext.Provider>
-  );
-};
 
 jest.mock("../context", () => ({
-  useTasksValue: () => mockUseContext(mockTaskContext),
+  useTasksValue: () => mockUseContext(mockContext),
 }));
+
 
 describe("Checkbox", () => {
   describe("Success", () => {
     it("renders the Checkbox", () => {
-      renderWithContext({ taskName: "test" });
+      renderWithContext(<Checkbox task={{ taskName: "test" }} />);
 
       expect(screen.getByTestId("checkbox-action")).toBeTruthy();
     });
 
     it("renders the task checkbox and accepts a onClick", () => {
-      renderWithContext({ taskName: "test" });
+      renderWithContext(<Checkbox task={{ taskName: "test" }} />);
       expect(screen.getByTestId("checkbox-action")).toBeTruthy();
       fireEvent.click(screen.getByTestId("checkbox-action"));
     });
