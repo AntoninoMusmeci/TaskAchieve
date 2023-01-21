@@ -16,7 +16,7 @@ function Sidebar() {
   const { selectedProject, setSelectedProject, setShow, show } = useProjectsValue();
   return (
     <div className={show ? "sidebar_wrapper": ""} onClick= {() =>  setShow(false)}>
-      <div className={show ? "sidebar show" : "sidebar"} data-testid="sidebar">
+      <div className={show ? "sidebar show" : "sidebar"} data-testid="sidebar" onClick= {(e) =>e.stopPropagation() }>
         <ul className="sidebar__generic">
           <li
             data-testid="inbox"
