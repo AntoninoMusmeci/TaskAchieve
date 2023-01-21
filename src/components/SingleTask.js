@@ -16,12 +16,14 @@ function SingleTask({ task }) {
           <span className="task__description-date"> {task.date} </span>
         </div>
         <AiOutlineEdit
+          data-testid="action-edit"
           className="task__edit"
           onClick={() => {
             setShowEditTask(!showEditTask);
           }}
         />
         <FaTrashAlt
+        data-testid="action-delete"
           className="task__edit"
           onClick={() => {
             deleteTask(task.docId);

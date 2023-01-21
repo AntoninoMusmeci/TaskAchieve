@@ -12,7 +12,7 @@ function SingleProject({ project }) {
       <span className="sidebar__project-name"> {project.name}</span>
       <span
         className="sidebar__project-delete"
-        test-dataid="project-delete"
+        data-testid="project-delete"
         onClick={() => setShowModal(!showModal)}
       >
         <FaTrashAlt />

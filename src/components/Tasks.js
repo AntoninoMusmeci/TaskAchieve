@@ -34,7 +34,7 @@ function Tasks() {
             <>
               <span
                 className="tasks__add-task-plus"
-                test-dataid="add-task-action"
+                data-testid="add-task-action"
               >
                 +
               </span>
