@@ -85,4 +85,3 @@ function Sidebar() {
 
 export default Sidebar;
 
-// bem ( block element modifier)

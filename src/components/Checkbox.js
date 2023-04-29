@@ -6,7 +6,6 @@ function Checkbox({ task }) {
     const newTask = {...task, archived: true}
     editTask(task,newTask)
   };
-  console.log(useTasksValue)
   return (
     <div
       className="checkbox-holder"

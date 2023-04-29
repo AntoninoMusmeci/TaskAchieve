@@ -37,29 +37,23 @@ describe("Tasks", () => {
   describe("Success", () => {
     it("renders a Tasks Checkbox", () => {
       renderWithContext(<Tasks />, tasks);
-      console.log(
-        "leeeeeeeeeeeeen",
-        screen.getAllByTestId("checkbox-action").length
-      );
+
       expect(screen.getAllByTestId("checkbox-action").length).toBe(3);
       expect(screen.getAllByTestId("checkbox-action")).toBeTruthy();
     });
     it("renders a empty task List", () => {
       renderWithContext(<Tasks />, []);
-      console.log(screen.queryAllByTestId("checkbox-action"))
       expect(screen.queryAllByTestId("checkbox-action")).toStrictEqual([]);
     });
 
     it("Test Render Task", () => {
-  
       renderWithContext(<Tasks />, tasks);
-      expect(screen.queryByText("test1")).toBeTruthy()
-      expect(screen.queryByText("test2")).toBeTruthy()
-      expect(screen.queryByText("test3")).toBeTruthy()
+      expect(screen.queryByText("test1")).toBeTruthy();
+      expect(screen.queryByText("test2")).toBeTruthy();
+      expect(screen.queryByText("test3")).toBeTruthy();
     });
 
     it("Test Click Add Task", () => {
-  
       renderWithContext(<Tasks />, tasks);
       fireEvent.click(screen.getByText("Add Task"));
     });

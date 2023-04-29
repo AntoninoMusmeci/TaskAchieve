@@ -7,10 +7,8 @@ const userId = process.env.REACT_APP_FIREBASE_TEST_USER_ID;
 
 export const useTask = (selectedProject) => {
   const [tasks, setTasks] = useState([]);
-  console.log(selectedProject);
 
   useEffect(() => {
-    console.log("fetch tasks");
     let task_data = firebase
       .firestore()
       .collection("tasks")
@@ -54,8 +52,6 @@ export const useProjects = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    console.log("fetch projects");
-
     firebase
       .firestore()
       .collection("projects")
