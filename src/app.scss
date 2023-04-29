@@ -1,4 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');
+//Variables
+$generic-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px rgba(0, 0, 0, 0.1) 0px 4px 11px;
+$generic-border: 1px solid #f1f1f1;
+$generic-bg: #3e3744;
+$breakpoint: "900px";
+$hover-color: #eeeeee;
+$icon-color: white;
+$bg-color: #ffffff;
 
 // general settings
 * {
@@ -17,21 +25,13 @@ body {
     padding: 0;
     line-height: 1;
     color: #202020;
-    background-color: #ffffff
+    background-color: $bg-color;
 }
 
 ul {
     margin: 0;
     padding: 0;
 }
-
-//Variables
-$generic-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px rgba(0, 0, 0, 0.1) 0px 4px 11px;
-$generic-border: 1px solid #f1f1f1;
-$generic-bg: #db4c3f;
-$breakpoint: "900px";
-$hover-color: #eeeeee;
-$icon-color: white;
 
 /* Mixins
   ============================================ */
@@ -113,7 +113,7 @@ $icon-color: white;
 /*Header
 ================================ */
 header {
-    border-bottom: solid 1px #ca2100;
+    // border-bottom: solid 1px #ca2100;
     background-color: $generic-bg;
     transition: height 200ns ease-in;
     box-shadow: 0 1px 2px rgbe(0, 0, 0, 0.15);
@@ -190,7 +190,8 @@ header {
     overflow-x: hidden;
     overflow-y: hidden;
     border-right: $generic-border;
-    background-color: #fafafa;
+    background-color: #e3e5ed;
+  
     left: -100%;
     transition: 800ms;
     @include no-select();
@@ -204,7 +205,7 @@ header {
         padding-left: 10px;
         border-radius: 6px;
         list-style-type: none;
-        color: #333;
+        color: black;
         cursor: pointer;
         line-height: 2.00;
         font-size: 18px;
@@ -228,12 +229,9 @@ header {
         &-delete {
             margin-left: auto;
             margin-right: 15px;
-
-            // display: none;
             svg {
-                color: #cacaca;
+                color: #555;
                 font-size: 15px;
-                // display: none;
             }
         }
     }
@@ -255,7 +253,7 @@ header {
             width: 100%;
             @include va('right');
             gap: 15px;
-            color: #cacaca;
+            color: #555;
             margin-right: 10px;
 
             svg {
@@ -631,7 +629,7 @@ header {
                 margin-right: 10px;
 
                 svg {
-                    fill: grey;
+                    fill: #555;
                 }
             }
         }
@@ -669,6 +667,7 @@ header {
 
         &.active {
             background-color: $generic-bg !important;
+            color: white
         }
 
         &.selectable {
